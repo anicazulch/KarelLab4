@@ -20,25 +20,32 @@ public class BeeperBot extends Robot
         findBeepers();
     }
     public void findBeepers() {
-        faceEast();
-        while(!nextToABeeper()){
+        while(!nextToABeeper() && frontIsClear()){
            move(); 
         }
+        pickUpColumn();
+        goDown();
+        faceEast();
+        }
+    public void pickUpColumn(){
         while(nextToABeeper()){
-            for(int x = 0; x<4; x++) {
-            pickBeeper();
             faceNorth();
+            pickBeeper();
             move();
         }
+    }
+    public void goDown(){
+        while(frontIsClear()){
+            faceSouth();
+            move();
         }
-        faceSouth();
     }
     public void faceEast() {
         while(!facingEast()){
             turnLeft();
         }
     }
-        public void faceSouth() {
+    public void faceSouth() {
         while(!facingSouth()){
             turnLeft();
         }
@@ -48,5 +55,4 @@ public class BeeperBot extends Robot
             turnLeft();
         }
     }
-    
 }
