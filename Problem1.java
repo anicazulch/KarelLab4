@@ -10,43 +10,41 @@ public class Problem1 extends Robot
     public Problem1(int st, int av, Direction dir, int numBeepers) {
         super(st, av, dir, numBeepers);
     }
-    
     public void escapeRoom() {
-        findWall();
-        if (!frontIsClear()){
-            turnRight();
+        startingPosition();
+        faceNorth();
+        checkWall();
+        faceEast();
+        checkWall();
+        faceSouth();
+        checkWall();
+        faceWest();
+        checkWall();
+    }
+    public void startingPosition(){
+        faceSouth();
+        while (frontIsClear()){
             move();
         }
-        if (checkLeftWall() && checkRightWall()){
-            escape();
+        faceWest();
+        while (frontIsClear()){
+            move();
         }
     }
-    public void findWall() {
-        faceWest();
+    public void checkWall(){
         while (frontIsClear()) {
             move();
+            checkLeft();
         }
     }
-    
-    public boolean checkLeftWall(){
-        faceWest();
+    public void checkLeft(){
+        turnLeft();
         if (frontIsClear()){
-            return true;
+            escape();
         }
-        else {
-            return false;
+        else{
+            turnRight();
         }
-
-    }
-    public boolean checkRightWall(){
-        faceEast();
-        if (frontIsClear()){
-            return true;
-        }
-        else {
-            return false;
-        }
-
     }
     public void escape() {
         faceSouth();
